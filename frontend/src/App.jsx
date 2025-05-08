@@ -5,28 +5,26 @@ import { Toaster } from "sonner";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
-import CollectionPage from "./pages/CollectionPage";
+import MyOrdersPage from "./pages/MyOrdersPage";
 
-
-const App = () => {
+function App() {
   return (
-    <BrowserRouter
-      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-    >
+    <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
       <Toaster position="top-right" />
       <Routes>
+        {/* Default layout route with Home, Orders, Profile */}
         <Route path="/" element={<UserLayout />}>
           <Route index element={<Home />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="orders" element={<MyOrdersPage />} />
           <Route path="profile" element={<Profile />} />
-          <Route path="collections/:collection" element={<CollectionPage />} />
         </Route>
-        <Route>{/* Admin Layout */}</Route>
-      </Routes>
-    </BrowserRouter >
-  );
-};
 
+        {/* These routes will render below UserLayout when needed */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
 export default App;
